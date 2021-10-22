@@ -20,13 +20,6 @@ subscribers = ["Jon", "Doe"]
 # ok: frappe-translation-python-formatting
 _('You have {0} subscribers in your mailing list.').format(len(subscribers))
 
-# ruleid: frappe-translation-python-splitting
-_('You have') + len(subscribers) + _('subscribers in your mailing list.')
-
-# ruleid: frappe-translation-python-splitting
-_('You have {0} subscribers \
-    in your mailing list').format(len(subscribers))
-
 # ok: frappe-translation-python-splitting
 _('You have {0} subscribers') \
     + 'in your mailing list'
