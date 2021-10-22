@@ -1,2 +1,3 @@
-# frappe-semgrep-rules
-Semgrep rules specific to frappe framework
+# Frappe semgrep rules
+
+Semgrep rules specific to [Frappe Framework](https://github.com/frappe/frappe)
