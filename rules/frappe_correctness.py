@@ -62,3 +62,10 @@ class DoctypeClass(Document):
 
 	def tainted_method(self):
 		self.status = "uptate"
+
+
+# ruleid: frappe-query-debug-statement
+frappe.db.get_value("DocType", "name", debug=True)
+
+# ruleid: frappe-query-debug-statement
+frappe.db.get_value("DocType", "name", debug=1)

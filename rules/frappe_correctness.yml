@@ -101,6 +101,17 @@ rules:
       include:
         - "*/**/doctype/*"
 
+
+- id: frappe-query-debug-statement
+  pattern-either:
+    - pattern: $FUNC(..., debug=True, ...)
+    - pattern: $FUNC(..., debug=1, ...)
+  message: |
+      Did you mean to leave this debug statement in?
+  languages: [python]
+  severity: WARNING
+
+
 - id: frappe-modifying-child-tables-while-iterating
   pattern-either:
     - pattern: |
