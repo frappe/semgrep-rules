@@ -11,5 +11,5 @@ These rules guard against typical mistakes or bad practices while working on Fra
 ## How to contribute new rules
 
 - Read how Semgrep works: [Getting started with semgrep rules](https://semgrep.dev/docs/writing-rules/overview/)
-- Write a rule a rule. Make sure it doesn't have too many false positives.
+- Write a rule. Make sure it doesn't have too many false positives.
 - Write positive and negative test cases for rule you are adding: [Testing rules](https://semgrep.dev/docs/writing-rules/testing-rules/)
