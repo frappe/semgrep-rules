@@ -28,3 +28,15 @@ rules:
       All user facing text must be wrapped in translate function. Please refer to translation documentation. https://frappeframework.com/docs/user/en/guides/basics/translations
   languages: [javascript]
   severity: ERROR
+
+- id: frappe-missing-translation-button-text
+  pattern-either:
+  - patterns:
+      - pattern: frm.add_custom_button("...", ...)
+      - pattern-not: frm.add_custom_button(__("..."), ...)
+      # ignore microtemplating e.g. msgprint("{{ _("server side translation") }}")
+      - pattern-not: frm.add_custom_button("=~/\{\{.*\_.*\}\}/i", ...)
+  message: |
+      All user facing button text must be wrapped in translate function. Please refer to translation documentation. https://frappeframework.com/docs/user/en/guides/basics/translations
+  languages: [javascript]
+  severity: ERROR
