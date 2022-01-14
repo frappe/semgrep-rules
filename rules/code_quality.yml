@@ -1,0 +1,11 @@
+rules:
+- id: overusing-args
+  patterns:
+    - pattern: |
+        def $FUNC(args):
+          ...
+  message: |
+    Using args as argument in functions reduces readability and allows passing ill-specified arguments. Avoid using `args` as only argument unless absolutely necessary.
+  languages: [python]
+  severity: WARNING
+
