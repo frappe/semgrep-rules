@@ -6,6 +6,7 @@ rules:
     - "report.py"
     exclude:
     - "**/regional"
+    - "**/test_*"
   pattern-either:
   - patterns:
       - pattern: |
