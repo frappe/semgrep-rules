@@ -3,8 +3,20 @@
 rules:
 - id: frappe-breaks-multitenancy
   patterns:
-    - pattern: |
-        $VAR = <... frappe.db.$METHOD(...) ...>
+    - pattern-either:
+      - pattern: $VAR = <... frappe.db.$METHOD(...) ...>
+      - pattern: $VAR = <... frappe.get_all(...) ...>
+      - pattern: $VAR = <... frappe.get_list(...) ...>
+      - pattern: $VAR = <... frappe.get_doc(...) ...>
+      - pattern: $VAR = <... frappe.get_single(...) ...>
+      - pattern: $VAR = <... frappe.get_cached_doc(...) ...>
+      - pattern: $VAR = <... frappe.cache(...) ...>
+      - pattern: $VAR = <... frappe.get_meta(...) ...>
+      - pattern: $VAR = <... frappe.get_hooks(...) ...>
+      - pattern: $VAR = <... frappe.local.$ATTR ...>
+      - pattern: $VAR = <... frappe.conf ...>
+      - pattern: $VAR = <... frappe.flags ...>
+      - pattern: $VAR = <... frappe.lang ...>
     - pattern-not-inside: |
         def $FUNCTION(...):
           ...

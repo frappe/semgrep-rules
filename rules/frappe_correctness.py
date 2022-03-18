@@ -12,6 +12,19 @@ variable = frappe.db.get_value("ABC", "x", "y")
 precision = cint(frappe.db.get_single_value("System Settings", "float_precision"))
 
 
+# ruleid: frappe-breaks-multitenancy
+items = list(frappe.get_all("Item"))
+
+# ruleid: frappe-breaks-multitenancy
+config = bool(frappe.local.conf.config)
+
+# ruleid: frappe-breaks-multitenancy
+lang = str(frappe.lang)
+
+# ruleid: frappe-breaks-multitenancy
+testing = bool(frappe.flags.in_test)
+
+
 # ruleid: frappe-modifying-but-not-comitting
 def on_submit(self):
 	if self.value_of_goods == 0:
@@ -20,6 +33,12 @@ def on_submit(self):
 
 	# ok: frappe-breaks-multitenancy
 	variable = frappe.db.get_value("ABC", "x", "y")
+
+	# ok: frappe-breaks-multitenancy
+	items = list(frappe.get_all("Item"))
+
+	# ok: frappe-breaks-multitenancy
+	config = bool(frappe.local.conf.config)
 
 
 class DocTyper(Document):
@@ -32,6 +51,12 @@ class DocTyper(Document):
 
 		# ok: frappe-breaks-multitenancy
 		self.attr = frappe.db.get_value("ABC", "x", "y")
+
+		# ok: frappe-breaks-multitenancy
+		land = str(frappe.lang)
+
+		# ok: frappe-breaks-multitenancy
+		testing = bool(frappe.flags.in_test)
 
 
 
