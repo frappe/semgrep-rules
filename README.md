@@ -6,7 +6,7 @@ These rules guard against typical mistakes or bad practices while working on Fra
 
 ## How to Use in my app
 
-- You can reuse the GitHub Action that Frappe Framework itself uses for running Semgrep: [Workflow file](https://github.com/frappe/frappe/blob/develop/.github/workflows/semgrep.yml)
+- You can reuse the GitHub Action that Frappe Framework itself uses for running Semgrep: [Workflow file](https://github.com/frappe/frappe/blob/develop/.github/workflows/linters.yml)
 
 ## How to contribute new rules
 
