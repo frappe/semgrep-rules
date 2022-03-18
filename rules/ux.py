@@ -29,3 +29,20 @@ msgprint(_("Helpful message"))
 
 # ok: frappe-missing-translate-function-python
 frappe.throw(_("Error occured"))
+
+not_translated = "abc"
+
+# ruleid: frappe-missing-translate-function-python
+frappe.throw("Some Text" + not_translated + "More text")
+
+# ok: frappe-missing-translate-function-python
+frappe.throw(_("Some Text") + not_translated)
+
+# ok: frappe-missing-translate-function-python
+frappe.throw(_("Some Text") + not_translated, title=_("None"))
+
+# ruleid: frappe-missing-translate-function-python
+frappe.throw(_("Some Text"), title="Warning")
+
+# ok: frappe-missing-translate-function-python
+frappe.throw(_("Some Text"), title=_("Warning"))
