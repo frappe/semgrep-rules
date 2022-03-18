@@ -1,6 +1,21 @@
 # This file specifies rules for correctness according to how frappe doctype data model works.
 
 rules:
+- id: frappe-breaks-multitenancy
+  patterns:
+    - pattern: |
+        $VAR = <... frappe.db.$METHOD(...) ...>
+    - pattern-not-inside: |
+        def $FUNCTION(...):
+          ...
+  paths:
+    exclude:
+      - "**/test_*.py"
+  message: |
+    $VAR global variable does not respect database multitenancy, consider wrapping it in function or method call.
+  languages: [python]
+  severity: ERROR
+
 - id: frappe-modifying-but-not-comitting
   patterns:
     - pattern: |
