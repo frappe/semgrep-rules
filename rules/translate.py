@@ -24,6 +24,11 @@ _('You have {0} subscribers in your mailing list.').format(len(subscribers))
 _('You have {0} subscribers') \
     + 'in your mailing list'
 
+# ok: frappe-translation-python-splitting
+_(
+	'You have {0} subscribers'
+) + 'in your mailing list'
+
 # ruleid: frappe-translation-trailing-spaces
 msg = _(" You have {0} pending invoice ")
 # ruleid: frappe-translation-trailing-spaces
