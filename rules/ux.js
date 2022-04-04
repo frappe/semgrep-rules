@@ -6,6 +6,12 @@ frappe.msgprint('{{ _("Both login and password required") }}');
 frappe.msgprint('What');
 
 // ok: frappe-missing-translate-function-js
+frappe.show_alert(__('What'));
+
+// ruleid: frappe-missing-translate-function-js
+frappe.show_alert('What');
+
+// ok: frappe-missing-translate-function-js
 frappe.throw('  {{ _("Both login and password required") }}.  ');
 
 
