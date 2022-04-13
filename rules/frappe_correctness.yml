@@ -199,3 +199,14 @@ rules:
     The PR contains a SQL query that may be re-written with frappe.qb (https://frappeframework.com/docs/user/en/api/query-builder) or the Database API (https://frappeframework.com/docs/user/en/api/database)
   languages: [python]
   severity: ERROR
+
+- id: frappe-overriding-local-proxies
+  patterns:
+    - pattern: frappe.$ATTR = ...
+    - metavariable-regex:
+        metavariable: $ATTR
+        regex: ^(db|qb|conf|form|form_dict|request|response|session|user|flags|error_log|debug_log|message_log|lang)$
+  message: |
+    frappe.$ATTR is a local proxy, assigning it to another object will remove the proxying and replace it with another object. Use frappe.local.$ATTR instead.
+  languages: [python]
+  severity: ERROR

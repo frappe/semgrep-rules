@@ -118,3 +118,13 @@ frappe.db.get_value("DocType", "name", debug=True)
 
 # ruleid: frappe-query-debug-statement
 frappe.db.get_value("DocType", "name", debug=1)
+
+# ruleid: frappe-overriding-local-proxies
+frappe.db = Database()
+
+# ok: frappe-overriding-local-proxies
+frappe.local.flags = {}
+
+def replace_request():
+	# ruleid: frappe-overriding-local-proxies
+	frappe.request = {}
