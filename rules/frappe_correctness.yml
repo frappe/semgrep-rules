@@ -17,6 +17,7 @@ rules:
       - pattern: $VAR = <... frappe.conf ...>
       - pattern: $VAR = <... frappe.flags ...>
       - pattern: $VAR = <... frappe.lang ...>
+      - pattern: $VAR = <... frappe._ ...>
     - pattern-not-inside: |
         def $FUNCTION(...):
           ...
