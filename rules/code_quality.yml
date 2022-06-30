@@ -9,3 +9,31 @@ rules:
   languages: [python]
   severity: WARNING
 
+
+- id: use-frappetestcase
+  patterns:
+    - pattern: |
+        class $TESTCASE(unittest.TestCase):
+          ...
+  message: |
+    Use frappe.tests.utils.FrappeTestCase instead of unittest.TestCase for reducing flaky tests.
+  languages: [python]
+  severity: WARNING
+
+- id: frappetestcase-missing-super-call
+  patterns:
+    - pattern: |
+        class $TESTCASE(FrappeTestCase):
+          @classmethod
+          def setUpClass():
+            ...
+    - pattern-not: |
+        class $TESTCASE(FrappeTestCase):
+          @classmethod
+          def setUpClass():
+            ...
+            super().setUpClass()
+  message: |
+    When using FrappeTestCase and overriding setUpClass, you need to call super().setUpClass()
+  languages: [python]
+  severity: WARNING
