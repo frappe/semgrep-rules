@@ -211,3 +211,14 @@ rules:
     frappe.$ATTR is a local proxy, assigning it to another object will remove the proxying and replace it with another object. Use frappe.local.$ATTR instead.
   languages: [python]
   severity: ERROR
+
+
+- id: frappe-single-value-type-safety
+  patterns:
+    - pattern-either:
+      - pattern: frappe.db.get_value($DOCTYPE, $DOCTYPE, ...)
+      - pattern: frappe.db.get_value($DOCTYPE, None, ...)
+  message: |
+    If $DOCTYPE is a single doctype then using `frappe.db.get_value` is discouraged for fetching value from single doctypes. frappe.db.get_value for single doctype is not type safe, use `frappe.db.get_single_value` instead.
+  languages: [python]
+  severity: ERROR
