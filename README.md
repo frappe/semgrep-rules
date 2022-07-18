@@ -6,7 +6,48 @@ These rules guard against typical mistakes or bad practices while working on Fra
 
 ## How to Use in my app
 
-- You can reuse the GitHub Action that Frappe Framework itself uses for running Semgrep: [Workflow file](https://github.com/frappe/frappe/blob/develop/.github/workflows/linters.yml)
+### Github Action
+
+You can use a GitHub Action to automatically validate changes with semgrep rules on all PRs. 
+
+```yaml
+name: Linters
+
+on:
+  pull_request: { }
+
+jobs:
+  linters:
+    name: Frappe Linter
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Download Semgrep rules
+        run: git clone --depth 1 https://github.com/frappe/semgrep-rules.git frappe-semgrep-rules
+
+      - name: Download semgrep
+        run: pip install semgrep
+
+      - name: Run Semgrep rules
+        run: semgrep ci --config ./frappe-semgrep-rules/rules
+```
+
+
+### Manually / running semgrep locally
+
+- Install and verify that semgrep works `semgrep --version`
+- clone the rules repository `git clonse `
+- Run semgrep specifying rules folder as config `semgrep --config=~/path/to/frappe-semgrep-rules/rules your_app_folder`
+
+
+Tip: You can optionally pass `--severity=ERROR` to ignore rules that produce warnings and only catch errors. 
+
 
 ## How to contribute new rules
 
