@@ -138,3 +138,17 @@ def testing_something(self):
 def testing_something(self):
 	# ok: frappe-single-value-type-safety
     duration = frappe.db.get_single_value("System Settings", "duration") or 24
+
+
+# ruleid: frappe-after-save-controller-hook
+class DoctypeNew(Document):
+	def before_save(self):
+		self.good_method()
+
+	def after_save(self):
+		self.bad_method()
+
+# ok: frappe-after-save-controller-hook
+class DoctypeNew(Document):
+	def before_save(self):
+		self.good_method()
