@@ -199,7 +199,7 @@ rules:
   message: |
     The PR contains a SQL query that may be re-written with frappe.qb (https://frappeframework.com/docs/user/en/api/query-builder) or the Database API (https://frappeframework.com/docs/user/en/api/database)
   languages: [python]
-  severity: ERROR
+  severity: WARNING
 
 - id: frappe-overriding-local-proxies
   patterns:
@@ -209,5 +209,16 @@ rules:
         regex: ^(db|qb|conf|form|form_dict|request|response|session|user|flags|error_log|debug_log|message_log|lang)$
   message: |
     frappe.$ATTR is a local proxy, assigning it to another object will remove the proxying and replace it with another object. Use frappe.local.$ATTR instead.
+  languages: [python]
+  severity: ERROR
+
+
+- id: frappe-single-value-type-safety
+  patterns:
+    - pattern-either:
+      - pattern: frappe.db.get_value($DOCTYPE, $DOCTYPE, ...)
+      - pattern: frappe.db.get_value($DOCTYPE, None, ...)
+  message: |
+    If $DOCTYPE is a single doctype then using `frappe.db.get_value` is discouraged for fetching value from single doctypes. frappe.db.get_value for single doctype is not type safe, use `frappe.db.get_single_value` instead.
   languages: [python]
   severity: ERROR

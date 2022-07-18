@@ -7,7 +7,7 @@ rules:
     Empty string is useless for translation.
     Please refer: https://frappeframework.com/docs/user/en/translations
   languages: [python, javascript, json]
-  severity: ERROR
+  severity: WARNING
 
 - id: frappe-translation-trailing-spaces
   pattern-either:
@@ -17,7 +17,7 @@ rules:
     Trailing or leading whitespace not allowed in translate strings.
     Please refer: https://frappeframework.com/docs/user/en/translations
   languages: [python, javascript, json]
-  severity: ERROR
+  severity: WARNING
 
 - id: frappe-translation-python-formatting
   pattern-either:
@@ -28,7 +28,7 @@ rules:
     Only positional formatters are allowed and formatting should not be done before translating.
     Please refer: https://frappeframework.com/docs/user/en/translations
   languages: [python]
-  severity: ERROR
+  severity: WARNING
 
 - id: frappe-translation-js-formatting
   patterns:
@@ -38,7 +38,7 @@ rules:
     Template strings are not allowed for text formatting.
     Please refer: https://frappeframework.com/docs/user/en/translations
   languages: [javascript, json]
-  severity: ERROR
+  severity: WARNING
 
 - id: frappe-translation-python-splitting
   pattern-either:
@@ -49,7 +49,7 @@ rules:
     Do not split strings inside translate function. Do not concatenate using translate functions.
     Please refer: https://frappeframework.com/docs/user/en/translations
   languages: [python]
-  severity: ERROR
+  severity: WARNING
 
 - id: frappe-translation-js-splitting
   pattern-either:
@@ -60,4 +60,4 @@ rules:
     Do not split strings inside translate function. Do not concatenate using translate functions.
     Please refer: https://frappeframework.com/docs/user/en/translations
   languages: [javascript, json]
-  severity: ERROR
+  severity: WARNING

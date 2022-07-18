@@ -128,3 +128,13 @@ frappe.local.flags = {}
 def replace_request():
 	# ruleid: frappe-overriding-local-proxies
 	frappe.request = {}
+
+
+def testing_something(self):
+	# ruleid: frappe-single-value-type-safety
+    duration = frappe.db.get_value("System Settings", None, "duration") or 24
+
+
+def testing_something(self):
+	# ok: frappe-single-value-type-safety
+    duration = frappe.db.get_single_value("System Settings", "duration") or 24

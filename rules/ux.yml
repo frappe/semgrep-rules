@@ -22,7 +22,7 @@ rules:
   message: |
       All user facing text must be wrapped in translate function. Please refer to translation documentation. https://frappeframework.com/docs/user/en/guides/basics/translations
   languages: [python]
-  severity: ERROR
+  severity: WARNING
 
 - id: frappe-missing-translate-function-js
   pattern-either:
@@ -42,7 +42,7 @@ rules:
   message: |
       All user facing text must be wrapped in translate function. Please refer to translation documentation. https://frappeframework.com/docs/user/en/guides/basics/translations
   languages: [javascript]
-  severity: ERROR
+  severity: WARNING
 
 - id: frappe-missing-translation-button-text
   pattern-either:
@@ -54,4 +54,4 @@ rules:
   message: |
       All user facing button text must be wrapped in translate function. Please refer to translation documentation. https://frappeframework.com/docs/user/en/guides/basics/translations
   languages: [javascript]
-  severity: ERROR
+  severity: WARNING
