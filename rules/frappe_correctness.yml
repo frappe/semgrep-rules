@@ -222,3 +222,13 @@ rules:
     If $DOCTYPE is a single doctype then using `frappe.db.get_value` is discouraged for fetching value from single doctypes. frappe.db.get_value for single doctype is not type safe, use `frappe.db.get_single_value` instead.
   languages: [python]
   severity: ERROR
+
+- id: frappe-after-save-controller-hook
+  pattern: |
+    class $DOCTYPE($SOMEBASECLASS, ...):
+      def after_save(self):
+        ...
+  message: |
+    `after_save` is not a valid DocType controller hook. Please have a look at the hooks available: https://frappeframework.com/docs/v13/user/en/basics/doctypes/controllers#controller-hooks
+  languages: [python]
+  severity: ERROR
