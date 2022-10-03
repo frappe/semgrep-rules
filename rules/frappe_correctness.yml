@@ -232,3 +232,17 @@ rules:
     `after_save` is not a valid DocType controller hook. Please have a look at the hooks available: https://frappeframework.com/docs/v13/user/en/basics/doctypes/controllers#controller-hooks
   languages: [python]
   severity: ERROR
+
+- id: frappe-qb-incorrect-order-usage
+  patterns:
+    - pattern-either:
+      - pattern: $QUERY. ... .orderby(..., "asc")
+      - pattern: $QUERY. ... .orderby(..., "desc")
+      - pattern: $QUERY. ... .orderby(..., frappe.qb.desc)
+      - pattern: $QUERY. ... .orderby(..., Order.desc)
+      - pattern: $QUERY. ... .orderby(..., Order.asc)
+    - pattern-not: $QUERY. ... .orderby(..., order=$LASTVAR)
+  message: |
+    `order` in `orderby` has to be a keyword argument like `.orderby("time", order=frappe.qb.desc)`. Re-check the generated query.
+  languages: [python]
+  severity: INFO
