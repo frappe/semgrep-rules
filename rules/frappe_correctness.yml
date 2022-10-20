@@ -29,6 +29,22 @@ rules:
   languages: [python]
   severity: ERROR
 
+- id: frappe-cache-breaks-multitenancy
+  patterns:
+    - pattern-either:
+      - pattern: frappe.cache().set(...)
+      - pattern: |
+          $VAR = frappe.cache()
+          $VAR.set(...)
+      - pattern: frappe.cache().get(...)
+      - pattern: |
+          $VAR = frappe.cache()
+          $VAR.get(...)
+  message: |
+    redis.set and redis.get do not support multitenancy, use set_value/get_value instead.
+  languages: [python]
+  severity: ERROR
+
 - id: frappe-modifying-but-not-comitting
   patterns:
     - pattern: |
