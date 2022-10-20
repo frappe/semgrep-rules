@@ -161,3 +161,18 @@ def bad_queries():
 def good_query():
 	# ok: frappe-qb-incorrect-order-usage
 	frappe.qb.from_("some table").select("*").orderby("somefield", order=frappe.qb.desc).run()
+
+
+def bad_cache():
+	# ruleid: frappe-cache-breaks-multitenancy
+	c = frappe.cache()
+	c.set("blah", "bleh")
+	# ruleid: frappe-cache-breaks-multitenancy
+	frappe.cache().get("blah")
+
+def good_cache():
+	# ok: frappe-cache-breaks-multitenancy
+	c = frappe.cache()
+	c.set_value("blah", "bleh")
+	# ok: frappe-cache-breaks-multitenancy
+	frappe.cache().get_value("blah")
