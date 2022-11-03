@@ -262,3 +262,10 @@ rules:
     `order` in `orderby` has to be a keyword argument like `.orderby("time", order=frappe.qb.desc)`. Re-check the generated query.
   languages: [python]
   severity: INFO
+
+- id: frappe-cur-frm-usage
+  pattern: cur_frm
+  message: |
+    `cur_frm` is deprecated and can introduce buggy behaviour.
+  languages: [javascript]
+  severity: WARNING
