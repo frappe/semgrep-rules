@@ -75,7 +75,7 @@ rules:
         regex: '^(?!ignore_linked_doctypes|status_updater)(.*)$'
     - metavariable-regex:
         metavariable: "$METHOD"
-        regex: "(on_submit|on_cancel)"
+        regex: "(on_submit|on_cancel|after_insert|on_update|on_update_after_submit)"
   message: |
     DocType modified in self.$METHOD. Please check if modification of self.$ATTR is commited to database.
   languages: [python]
@@ -129,7 +129,7 @@ rules:
           self.$ATTR = ...
   - metavariable-regex:
       metavariable: "$METHOD"
-      regex: "(on_submit|on_cancel)"
+      regex: "(on_submit|on_cancel|after_insert|on_update|on_update_after_submit)"
   message: |
     self.$ANOTHER_METHOD is called from self.$METHOD, check if changes to self.$ATTR are commited to database.
   languages: [python]
