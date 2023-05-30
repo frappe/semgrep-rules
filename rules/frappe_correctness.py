@@ -176,3 +176,20 @@ def good_cache():
 	c.set_value("blah", "bleh")
 	# ok: frappe-cache-breaks-multitenancy
 	frappe.cache().get_value("blah")
+
+
+
+def ins():
+	# ruleid: frappe-get-doc-for-creation
+	a = frappe.get_doc(doctype="blah", name="why")
+	a.x = "y"
+	a.insert()
+
+	# ruleid: frappe-get-doc-for-creation
+	frappe.get_doc(doctype="blah", name="why").insert()
+
+
+	# ok: frappe-get-doc-for-creation
+	a = frappe.get_doc(doctype="blah", name="why")
+	a.x = "y"
+	a.save()  # save is fine
