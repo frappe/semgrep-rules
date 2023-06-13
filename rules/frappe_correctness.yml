@@ -146,6 +146,14 @@ rules:
       include:
         - "*/**/doctype/*"
 
+- id: frappe-no-functional-code
+  pattern-either:
+    - pattern: "map(...)"
+    - pattern: "filter(...)"
+  message: |
+      Mixing functional programming usually yields in confusing code and bugs. Use list comprehensions or generators instead.
+  languages: [python]
+  severity: WARNING
 
 - id: frappe-query-debug-statement
   pattern-either:

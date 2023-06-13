@@ -193,3 +193,12 @@ def ins():
 	a = frappe.get_doc(doctype="blah", name="why")
 	a.x = "y"
 	a.save()  # save is fine
+
+# ruleid: frappe-no-functional-code
+map(lambda x: x, [])
+
+# ruleid: frappe-no-functional-code
+filter(lambda x: x, [])
+
+# ruleid: frappe-no-functional-code
+map(lambda x: x, filter(lambda x: x, []))
