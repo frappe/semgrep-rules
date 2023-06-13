@@ -251,8 +251,9 @@ rules:
 - id: frappe-set-value-semantics
   patterns:
     - pattern-either:
-      - pattern: frappe.db.set_value($DOCTYPE, None, ...)
-      - pattern: frappe.db.set_value($DOCTYPE, $DOCTYPE, ...)
+      - pattern: frappe.db.set_value($DOCTYPE, None, $...AFTER)
+      - pattern: frappe.db.set_value($DOCTYPE, $DOCTYPE, $...AFTER)
+  fix: frappe.db.set_single_value($DOCTYPE, $...AFTER)
   message: |
     If $DOCTYPE is a single doctype then using `frappe.db.set_value` is discouraged for setting values in DB. Use db.set_single_value for single doctype instead.
   languages: [python]
