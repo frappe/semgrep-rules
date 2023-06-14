@@ -241,8 +241,9 @@ rules:
 - id: frappe-single-value-type-safety
   patterns:
     - pattern-either:
-      - pattern: frappe.db.get_value($DOCTYPE, $DOCTYPE, ...)
-      - pattern: frappe.db.get_value($DOCTYPE, None, ...)
+      - pattern: frappe.db.get_value($DOCTYPE, $DOCTYPE, $...AFTER)
+      - pattern: frappe.db.get_value($DOCTYPE, None, $...AFTER)
+  fix: frappe.db.get_single_value($DOCTYPE, $...AFTER)
   message: |
     If $DOCTYPE is a single doctype then using `frappe.db.get_value` is discouraged for fetching value from single doctypes. frappe.db.get_value for single doctype is not type safe, use `frappe.db.get_single_value` instead.
   languages: [python]
