@@ -211,7 +211,7 @@ rules:
         - "**/patches/**"
         - "**/demo/**"
   languages: [python]
-  severity: ERROR
+  severity: WARNING
 
 - id: frappe-using-db-sql
   pattern-either:
@@ -302,4 +302,4 @@ rules:
   message: |
     `get_doc` should not be used for creating new document, use `new_doc` instead.
   languages: [python]
-  severity: ERROR
+  severity: WARNING

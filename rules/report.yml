@@ -19,7 +19,7 @@ rules:
   message: |
       All user facing text must be wrapped in translate function. Please refer to translation documentation. https://frappeframework.com/docs/user/en/guides/basics/translations
   languages: [python]
-  severity: ERROR
+  severity: WARNING
 
 - id: frappe-translated-values-in-business-logic
   paths:
@@ -33,4 +33,4 @@ rules:
   message: |
       Using translated values in options field will require you to translate the values while comparing in business logic. Instead of passing translated labels provide objects that contain both label and value. e.g. { label: __("Option value"), value: "Option value"}
   languages: [javascript]
-  severity: ERROR
+  severity: WARNING
