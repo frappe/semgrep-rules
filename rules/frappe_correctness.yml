@@ -11,6 +11,7 @@ rules:
       - pattern: $VAR = <... frappe.get_single(...) ...>
       - pattern: $VAR = <... frappe.get_cached_doc(...) ...>
       - pattern: $VAR = <... frappe.cache(...) ...>
+      - pattern: $VAR = <... frappe.cache ...>
       - pattern: $VAR = <... frappe.get_meta(...) ...>
       - pattern: $VAR = <... frappe.get_hooks(...) ...>
       - pattern: $VAR = <... frappe.local.$ATTR ...>
@@ -41,6 +42,8 @@ rules:
       - pattern: |
           $VAR = frappe.cache()
           $VAR.get(...)
+      - pattern: frappe.cache.set(...)
+      - pattern: frappe.cache.get(...)
   message: |
     redis.set and redis.get do not support multitenancy, use set_value/get_value instead.
   languages: [python]
