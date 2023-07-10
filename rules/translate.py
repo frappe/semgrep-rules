@@ -15,6 +15,20 @@ _('Welcome %(name)s, get started with ERPNext in just a few clicks.' % {'name': 
 # ruleid: frappe-translation-python-formatting
 _('Welcome {0}, get started with ERPNext in just a few clicks.'.format(full_name))
 
+# ruleid: frappe-translation-python-formatting
+msg = "Welcome %s, get started with ERPNext in just a few clicks."  % full_name
+random_statement = "random statement"
+_(msg)
+
+# ruleid: frappe-translation-python-formatting
+msg = "Welcome {0}, get started with ERPNext in just a few clicks.".format(full_name)
+random_statement = "random statement"
+_(msg)
+
+# ruleid: frappe-translation-python-formatting
+msg = f"Welcome {full_name}, get started with ERPNext in just a few clicks."
+random_statement = "random statement"
+_(msg)
 
 subscribers = ["Jon", "Doe"]
 # ok: frappe-translation-python-formatting
