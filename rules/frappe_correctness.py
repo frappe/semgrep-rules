@@ -178,22 +178,6 @@ def good_cache():
 	frappe.cache().get_value("blah")
 
 
-
-def ins():
-	# ruleid: frappe-get-doc-for-creation
-	a = frappe.get_doc(doctype="blah", name="why")
-	a.x = "y"
-	a.insert()
-
-	# ruleid: frappe-get-doc-for-creation
-	frappe.get_doc(doctype="blah", name="why").insert()
-
-
-	# ok: frappe-get-doc-for-creation
-	a = frappe.get_doc(doctype="blah", name="why")
-	a.x = "y"
-	a.save()  # save is fine
-
 # ruleid: frappe-no-functional-code
 map(lambda x: x, [])
 

@@ -293,17 +293,3 @@ rules:
     `cur_frm` is deprecated and can introduce buggy behaviour.
   languages: [javascript]
   severity: WARNING
-
-- id: frappe-get-doc-for-creation
-  patterns:
-    - pattern-either:
-      - pattern: |
-          $DOC = frappe.get_doc(...)
-          ...
-          $DOC.insert(...)
-      - pattern: |
-          frappe.get_doc(...).insert(...)
-  message: |
-    `get_doc` should not be used for creating new document, use `new_doc` instead.
-  languages: [python]
-  severity: WARNING
