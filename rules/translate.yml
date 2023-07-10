@@ -24,6 +24,18 @@ rules:
   - pattern: _("..." % ...)
   - pattern: _("...".format(...))
   - pattern: _(f"...")
+  - pattern: |
+      $VAR = "..." % ...
+      ...
+      _($VAR)
+  - pattern: |
+      $VAR = "...".format(...)
+      ...
+      _($VAR)
+  - pattern: |
+      $VAR = f"..."
+      ...
+      _($VAR)
   message: |
     Only positional formatters are allowed and formatting should not be done before translating.
     Please refer: https://frappeframework.com/docs/user/en/translations
