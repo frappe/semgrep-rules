@@ -31,7 +31,7 @@ rules:
   - pattern: |
       $VAR = "...".format(...)
       ...
-      _($VAR)  
+      _($VAR)
   - pattern: |
       $VAR = f"..."
       ...
