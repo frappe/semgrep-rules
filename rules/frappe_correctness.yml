@@ -293,3 +293,10 @@ rules:
     `cur_frm` is deprecated and can introduce buggy behaviour.
   languages: [javascript]
   severity: WARNING
+
+- id: frappe-incorrect-debounce
+  pattern: frappe.utils.debounce(...)(...);
+  message: |
+    `debounce` should be used to create a debounced version of function and should only be called once. If the function is called multiple times then each time a new debounced version of function gets created and you don't actually achieve debounce behaviour.
+  languages: [javascript]
+  severity: ERROR
