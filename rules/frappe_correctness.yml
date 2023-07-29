@@ -300,3 +300,15 @@ rules:
     `debounce` should be used to create a debounced version of function and should only be called once. If the function is called multiple times then each time a new debounced version of function gets created and you don't actually achieve debounce behaviour.
   languages: [javascript]
   severity: ERROR
+
+- id: frappe-realtime-pick-room
+  patterns:
+    - pattern: frappe.publish_realtime(...)
+    - pattern-not: frappe.publish_realtime(..., doctype=$SOMETHING, ...)
+    - pattern-not: frappe.publish_realtime(..., docname=$SOMETHING, ...)
+    - pattern-not: frappe.publish_realtime(..., room=$SOMETHING, ...)
+    - pattern-not: frappe.publish_realtime(..., user=$SOMETHING, ...)
+  message: |
+    This call will publish message to everyone on site, do you really want that? Specify doctype, docname, room or user.
+  languages: [python]
+  severity: ERROR
