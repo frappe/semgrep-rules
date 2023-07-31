@@ -20,6 +20,7 @@ rules:
       - pattern: $VAR = <... frappe.lang ...>
       - pattern: $VAR = <... frappe._(...) ...>
       - pattern: $VAR = <... flt(...) ...>
+      - pattern: $VAR = <... frappe.qb ...>
     - pattern-not-inside: |
         def $FUNCTION(...):
           ...
