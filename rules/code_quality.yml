@@ -9,3 +9,10 @@ rules:
   languages: [python]
   severity: WARNING
 
+- id: use-vanilla-js-include
+  pattern: in_list($LIST, $ITEM)
+  fix: $LIST.includes($ITEM)
+  message: |
+    in_list(list, item) is simple wrapper around list.includes(item), avoid use of such wrappers.
+  languages: [javascript]
+  severity: WARNING
