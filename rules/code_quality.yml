@@ -16,3 +16,11 @@ rules:
     in_list(list, item) is simple wrapper around list.includes(item), avoid use of such wrappers.
   languages: [javascript]
   severity: WARNING
+
+- id: useless-get-doc-dict
+  pattern: frappe.get_doc(dict($X=$Y, $...OTHER_KEYS))
+  fix: frappe.get_doc($X=$Y, $...OTHER_KEYS)
+  message: |
+    get_doc(dict(k=v)) is same as get_doc(k=v)
+  languages: [python]
+  severity: WARNING
