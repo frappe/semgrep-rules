@@ -186,3 +186,20 @@ filter(lambda x: x, [])
 
 # ruleid: frappe-no-functional-code
 map(lambda x: x, filter(lambda x: x, []))
+
+
+# ruleid: frappe-monkey-patching-not-allowed
+from frappe import permissions
+
+permissions.has_permission = lambda : True
+
+
+# ruleid: frappe-monkey-patching-not-allowed
+from frappe import permissions
+
+permissions.has_permission.xyz = lambda : True
+
+# ruleid: frappe-monkey-patching-not-allowed
+from frappe.permissions import has_permission
+
+has_permission.xyz = lambda : True
