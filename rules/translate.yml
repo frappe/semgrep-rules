@@ -23,17 +23,12 @@ rules:
   pattern-either:
   - pattern: _("..." % ...)
   - pattern: _("...".format(...))
-  - pattern: _(f"...")
   - pattern: |
       $VAR = "..." % ...
       ...
       _($VAR)
   - pattern: |
       $VAR = "...".format(...)
-      ...
-      _($VAR)
-  - pattern: |
-      $VAR = f"..."
       ...
       _($VAR)
   message: |
