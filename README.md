@@ -42,7 +42,7 @@ jobs:
 ### Manually / running semgrep locally
 
 - Install and verify that semgrep works `semgrep --version`
-- clone the rules repository `git clonse `
+- clone the rules repository with `git clone`
 - Run semgrep specifying rules folder as config `semgrep --config=~/path/to/frappe-semgrep-rules/rules your_app_folder`
 
 
