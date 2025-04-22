@@ -64,6 +64,12 @@ _("")
 # ruleid: frappe-translation-empty-string
 _('')
 
+# ruleid: frappe-translation-variable-only
+_("{0}")
+# ruleid: frappe-translation-variable-only
+_("{0} {1}")
+# ruleid: frappe-translation-variable-only
+_("{}")
 
 class Test:
 	# ok: frappe-translation-python-splitting

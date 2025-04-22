@@ -3,6 +3,13 @@ __("")
 // ruleid: frappe-translation-empty-string
 __('')
 
+// ruleid: frappe-translation-variable-only
+__("{0}")
+// ruleid: frappe-translation-variable-only
+__("{0} {1}")
+// ruleid: frappe-translation-variable-only
+__("{}")
+
 // ok: frappe-translation-js-formatting
 __('Welcome {0}, get started with ERPNext in just a few clicks.', [full_name]);
 

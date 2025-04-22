@@ -9,6 +9,22 @@ rules:
   languages: [python, javascript, json]
   severity: WARNING
 
+- id: frappe-translation-variable-only
+  pattern-either:
+  - pattern: _("{}", ...)
+  - pattern: _("{0}", ...)
+  - pattern: _("{0} {1}", ...)
+  - pattern: _("{0} {1} {2}", ...)
+  - pattern: __("{}", ...)
+  - pattern: __("{0}", ...)
+  - pattern: __("{0} {1}", ...)
+  - pattern: __("{0} {1} {2}", ...)
+  message: |
+    Tries to translate variables that are not known to the translators. It has the same effect as using the variables directly.
+    Please refer: https://frappeframework.com/docs/user/en/translations
+  languages: [python, javascript, json]
+  severity: WARNING
+
 - id: frappe-translation-trailing-spaces
   pattern-either:
     - pattern: _("=~/(^[ \t]+|[ \t]+$)/")
