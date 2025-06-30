@@ -68,3 +68,15 @@ rules:
     Please refer: https://frappeframework.com/docs/user/en/translations
   languages: [javascript, json]
   severity: WARNING
+
+- id: frappe-untranslated-label-in-translated-message
+  pattern: |
+    _("...", ...).format(
+      ...,
+      self.meta.get_label(...),
+      ...
+    )
+  message: |
+    The label returned by `self.meta.get_label(...)` needs to be translated by wrapping it in `_()`.
+  languages: [python]
+  severity: WARNING
