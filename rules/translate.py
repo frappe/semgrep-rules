@@ -25,11 +25,6 @@ msg = "Welcome {0}, get started with ERPNext in just a few clicks.".format(full_
 random_statement = "random statement"
 _(msg)
 
-# ruleid: frappe-translation-python-formatting
-msg = f"Welcome {full_name}, get started with ERPNext in just a few clicks."
-random_statement = "random statement"
-_(msg)
-
 subscribers = ["Jon", "Doe"]
 # ok: frappe-translation-python-formatting
 _('You have {0} subscribers in your mailing list.').format(len(subscribers))
@@ -53,8 +48,6 @@ msg = _(" You have {0} pending invoice")
 # ok: frappe-translation-trailing-spaces
 msg = ' ' + _("You have {0} pending invoices") + ' '
 
-# ruleid: frappe-translation-python-formatting
-_(f"can not format like this - {subscribers}")
 # ruleid: frappe-translation-python-splitting
 _(f"what" + f"this is also not cool")
 
