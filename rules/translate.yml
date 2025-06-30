@@ -69,14 +69,11 @@ rules:
   languages: [javascript, json]
   severity: WARNING
 
-- id: frappe-untranslated-label-in-error-message
+- id: frappe-untranslated-label-in-translated-message
   pattern: |
-    frappe.throw(
-      _("...", ...).format(
-        ...,
-        self.meta.get_label(...),
-        ...
-      ),
+    _("...", ...).format(
+      ...,
+      self.meta.get_label(...),
       ...
     )
   message: |
