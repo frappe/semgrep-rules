@@ -337,3 +337,24 @@ rules:
         - "**/test_*.py"
   languages: [python]
   severity: ERROR
+
+- id: frappe-test-whitelist-missing-protection
+  patterns:
+    - pattern: |
+        @frappe.whitelist(...)
+        def $FUNC(...):
+          ...
+    - pattern-not: |
+        @whitelist_for_tests(...)
+        def $FUNC(...):
+          ...
+  paths:
+    include:
+      - "**/test_*.py"
+      - "**/frappe/tests/ui_test_helpers.py"
+  message: |
+    Test endpoints should use @whitelist_for_tests() instead of @frappe.whitelist() to ensure they're only accessible in test mode.
+  languages: [python]
+  severity: ERROR
+  fix: |
+    @whitelist_for_tests(...)
