@@ -2,6 +2,7 @@ import frappe
 from frappe import _
 
 from frappe.model.document import Document
+from frappe.tests.utils import whitelist_for_tests
 from frappe.utils import cint
 
 
@@ -215,3 +216,25 @@ has_permission.xyz = lambda: True
 def test_single():
     # ok: frappe-single-value-type-safety
     frappe.db.get_single_value("ABC", "ABC", ["xyz", "xac"])
+
+
+# Test file context - these should be in test_*.py files
+# ruleid: frappe-test-whitelist-missing-protection
+@frappe.whitelist()
+def test_endpoint():
+    return "test"
+
+# ok: frappe-test-whitelist-missing-protection
+@whitelist_for_tests()
+def test_endpoint_protected():
+    return "test"
+
+# ruleid: frappe-test-whitelist-missing-protection
+@frappe.whitelist(allow_guest=True)
+def test_guest_endpoint():
+    return "test"
+
+# ok: frappe-test-whitelist-missing-protection
+@whitelist_for_tests(allow_guest=True)
+def test_guest_endpoint_protected():
+    return "test"

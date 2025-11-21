@@ -345,7 +345,7 @@ rules:
         def $FUNC(...):
           ...
     - pattern-not: |
-        @whitelist_for_tests(...)
+        @$ANYTHING.whitelist_for_tests(...)
         def $FUNC(...):
           ...
   paths:
