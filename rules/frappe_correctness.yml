@@ -217,6 +217,16 @@ rules:
   languages: [python]
   severity: WARNING
 
+- id: frappe-redis-flush
+  patterns:
+    - pattern-either:
+      - pattern: frappe.cache.flushall()
+      - pattern: frappe.cache().flushall()
+  message: |
+    flushall flushes all databases on Redis server, use flushdb instead.
+  languages: [python]
+  severity: ERROR
+
 - id: frappe-overriding-local-proxies
   patterns:
     - pattern: frappe.$ATTR = ...
