@@ -14,3 +14,11 @@ rules:
           # Exclude 'self' and 'cls' as they typically don't take hints
           regex: ^(?!self$|cls$).*$
     message: "The argument '$ARG' in function '$FUNC' is missing a type hint."
+  - id: guest-whitelisted-method
+    languages: [python]
+    severity: INFO
+    patterns:
+      - pattern: |
+          @frappe.whitelist(..., allow_guest=True, ...)
+          def $FUNC(...): ...
+    message: "Whitelisted method that's accesible to guest should be manually reviewed for security issues"
