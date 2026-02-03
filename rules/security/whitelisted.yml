@@ -16,7 +16,7 @@ rules:
     message: "The argument '$ARG' in function '$FUNC' is missing a type hint."
   - id: guest-whitelisted-method
     languages: [python]
-    severity: INFO
+    severity: WARNING
     patterns:
       - pattern: |
           @frappe.whitelist(..., allow_guest=True, ...)

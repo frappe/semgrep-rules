@@ -8,3 +8,11 @@ rules:
     dynamic content. Avoid it or use safe_eval().
   languages: [python]
   severity: ERROR
+
+- id: frappe-ssti
+  patterns:
+  - pattern: render_template($ARG, ...)
+  message: |
+    Detected the use of render_template, make sure $ARG comes from trusted source.
+  languages: [python]
+  severity: WARNING
