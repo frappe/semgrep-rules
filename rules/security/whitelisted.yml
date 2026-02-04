@@ -21,4 +21,4 @@ rules:
       - pattern: |
           @frappe.whitelist(..., allow_guest=True, ...)
           def $FUNC(...): ...
-    message: "Whitelisted method that's accesible to guest should be manually reviewed for security issues"
+    message: "Whitelisted method that's accesible to guest should be manually reviewed by security team."

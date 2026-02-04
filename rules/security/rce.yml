@@ -16,6 +16,7 @@ rules:
   patterns:
   - pattern: render_template($ARG, ...)
   message: |
-    Detected the use of render_template, make sure $ARG comes from trusted source.
+    Detected the use of render_template, make sure $ARG comes from trusted
+    source. This code should be audited by security team.
   languages: [python]
-  severity: WARNING
+  severity: ERROR
