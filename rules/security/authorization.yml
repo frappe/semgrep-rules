@@ -1,0 +1,12 @@
+rules:
+- id: relaxed-permissions
+  patterns:
+  - pattern: |
+      {
+        "role": "All",
+        ...
+      }
+  message: |
+    Avoid using "All" role. It's available to every user, including website user.
+  languages: [json]
+  severity: WARNING
