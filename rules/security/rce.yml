@@ -1,11 +1,14 @@
 rules:
 - id: frappe-codeinjection-eval
   patterns:
-  - pattern-not: eval("...")
-  - pattern: eval(...)
+  - pattern-either:
+    - pattern: eval(...)
+    - pattern: exec(...)
+    - pattern: safe_exec(...)
+    - pattern: safe_eval(...)
   message: |
-    Detected the use of eval(). eval() can be dangerous if used to evaluate
-    dynamic content. Avoid it or use safe_eval().
+    Detected the use of functions that can be  dangerous if used to evaluate
+    dynamic content. This code should be manually audited by security team.
   languages: [python]
   severity: ERROR
 
