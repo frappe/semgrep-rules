@@ -14,7 +14,9 @@ rules:
 
 - id: frappe-ssti
   patterns:
-  - pattern: render_template($ARG, ...)
+  - pattern-either:
+    - pattern: render_template($ARG, ...)
+    - pattern: frappe.render_template($ARG, ...)
   message: |
     Detected the use of render_template, make sure $ARG comes from trusted
     source. This code should be audited by security team.
