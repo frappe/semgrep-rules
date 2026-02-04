@@ -10,3 +10,13 @@ rules:
     Avoid using "All" role. It's available to every user, including website user.
   languages: [json]
   severity: WARNING
+
+- id: frappe-setuser
+  patterns:
+  - pattern-either:
+    - pattern: frappe.set_user(...)
+  message: |
+    Detected the use of functions that can be  dangerous if used incorrectly.
+    This code should be manually audited by security team.
+  languages: [python]
+  severity: WARNING
