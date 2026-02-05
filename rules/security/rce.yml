@@ -1,0 +1,24 @@
+rules:
+- id: frappe-codeinjection-eval
+  patterns:
+  - pattern-either:
+    - pattern: eval(...)
+    - pattern: exec(...)
+    - pattern: safe_exec(...)
+    - pattern: safe_eval(...)
+  message: |
+    Detected the use of functions that can be  dangerous if used to evaluate
+    dynamic content. This code should be manually audited by security team.
+  languages: [python]
+  severity: ERROR
+
+- id: frappe-ssti
+  patterns:
+  - pattern-either:
+    - pattern: render_template($ARG, ...)
+    - pattern: frappe.render_template($ARG, ...)
+  message: |
+    Detected the use of render_template, make sure $ARG comes from trusted
+    source. This code should be audited by security team.
+  languages: [python]
+  severity: ERROR
