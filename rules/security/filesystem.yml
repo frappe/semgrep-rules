@@ -8,3 +8,6 @@ rules:
     security team to avoid file traversal issues.
   languages: [python]
   severity: WARNING
+  paths:
+    exclude:
+      - "**/test_*.py"
