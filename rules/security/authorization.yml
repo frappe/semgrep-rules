@@ -15,6 +15,9 @@ rules:
   patterns:
   - pattern-either:
     - pattern: frappe.set_user(...)
+  paths:
+    exclude:
+      - "**/test_*.py"
   message: |
     Detected the use of functions that can be  dangerous if used incorrectly.
     This code should be manually audited by security team.
