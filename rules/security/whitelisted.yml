@@ -11,8 +11,8 @@ rules:
           def $FUNC(..., $ARG: $TYPE, ...): ...
       - metavariable-regex:
           metavariable: $ARG
-          # Exclude 'self' and 'cls' as they typically don't take hints
-          regex: ^(?!self$|cls$).*$
+          # Exclude 'self', 'cls', and '*' as they typically don't take hints
+          regex: ^(?!self$|cls$|\*$).*$
     message: "The argument '$ARG' in function '$FUNC' is missing a type hint."
   - id: guest-whitelisted-method
     languages: [python]
