@@ -14,6 +14,23 @@ rules:
           # Exclude 'self', 'cls', and '*' as they typically don't take hints
           regex: ^(?!self$|cls$|\*$).*$
     message: "The argument '$ARG' in function '$FUNC' is missing a type hint."
+  - id: bare-container-type-hint
+    languages: [python]
+    severity: WARNING
+    pattern-either:
+      - pattern: |
+          @frappe.whitelist(...)
+          def $FUNC(..., $ARG: list, ...): ...
+      - pattern: |
+          @frappe.whitelist(...)
+          def $FUNC(..., $ARG: dict, ...): ...
+      - pattern: |
+          @frappe.whitelist(...)
+          def $FUNC(..., $ARG: list | $X, ...): ...
+      - pattern: |
+          @frappe.whitelist(...)
+          def $FUNC(..., $ARG: dict | $X, ...): ...
+    message: "The argument '$ARG' in function '$FUNC' is missing a specific container type hint (e.g., list[str])."
   - id: guest-whitelisted-method
     languages: [python]
     severity: WARNING
