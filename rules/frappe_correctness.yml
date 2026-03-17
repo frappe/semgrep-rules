@@ -148,7 +148,7 @@ rules:
   severity: WARNING
   paths:
       include:
-        - "*/**/doctype/*"
+        - "**/doctype/*"
 
 - id: frappe-no-functional-code
   pattern-either:
@@ -185,7 +185,7 @@ rules:
   severity: ERROR
   paths:
       include:
-        - "*/**/doctype/*"
+        - "**/doctype/*"
 
 - id: frappe-same-key-assigned-twice
   pattern-either:
