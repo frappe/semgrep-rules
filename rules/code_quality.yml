@@ -42,6 +42,11 @@ rules:
     - pattern-not-inside: "if <... frappe.has_permission(...) ...> : ..."
     - pattern-not-inside: "$PRED_TRUE if frappe.has_permission(...) else $PRED_FALSE"
     - pattern-not-inside: assert frappe.has_permission(...)
+    # value used as a comprehension predicate (list / set / dict / generator)
+    - pattern-not-inside: "[$EL for $V in $IT if <... frappe.has_permission(...) ...>]"
+    - pattern-not-inside: "{$EL for $V in $IT if <... frappe.has_permission(...) ...>}"
+    - pattern-not-inside: "{$K: $VAL for $V in $IT if <... frappe.has_permission(...) ...>}"
+    - pattern-not-inside: "($EL for $V in $IT if <... frappe.has_permission(...) ...>)"
   paths:
     exclude:
       - "**/test_*.py"
