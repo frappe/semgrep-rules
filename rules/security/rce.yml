@@ -6,6 +6,8 @@ rules:
     - pattern: exec(...)
     - pattern: safe_exec(...)
     - pattern: safe_eval(...)
+    - pattern: get_attr(...)
+    - pattern: frappe.call(...)
   message: |
     Detected the use of functions that can be  dangerous if used to evaluate
     dynamic content. This code should be manually audited by security team.
