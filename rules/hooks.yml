@@ -1,0 +1,17 @@
+rules:
+- id: override-doctype-class
+  languages: [python]
+  message: |
+    Avoid `override_doctype_class` in hooks.py. It replaces the controller class of a
+    DocType, so only one app can override a DocType and the override breaks silently
+    when the original controller changes.
+    Use document events (`doc_events`) or `extend_doctype_class`.
+  severity: ERROR
+  patterns:
+    - pattern: override_doctype_class = $VALUE
+    - pattern-not-inside: |
+        def $FUNC(...):
+          ...
+  paths:
+    include:
+      - "hooks.py"
