@@ -218,6 +218,39 @@ def test_single():
     frappe.db.get_single_value("ABC", "ABC", ["xyz", "xac"])
 
 
+class EnqueuingDoctype(Document):
+    def on_submit(self):
+        # ruleid: frappe-enqueue-without-after-commit
+        frappe.enqueue(some_method, doc=self, queue="long")
+
+    def on_trash(self):
+        # ruleid: frappe-enqueue-without-after-commit
+        frappe.enqueue_doc(self.doctype, self.name, "some_method", now=frappe.flags.in_test)
+
+    def helper_method_called_from_hook(self):
+        # ruleid: frappe-enqueue-without-after-commit
+        enqueue("app.module.method", timeout=600)
+
+
+class GoodEnqueuingDoctype(Document):
+    def on_submit(self):
+        # ok: frappe-enqueue-without-after-commit
+        frappe.enqueue(some_method, doc=self, queue="long", enqueue_after_commit=True)
+
+    def on_trash(self):
+        # ok: frappe-enqueue-without-after-commit
+        frappe.enqueue_doc(self.doctype, self.name, "some_method", now=True)
+
+    def on_update(self):
+        # ok: frappe-enqueue-without-after-commit
+        frappe.enqueue(some_method, enqueue_after_commit=not frappe.flags.in_test)
+
+
+# ok: frappe-enqueue-without-after-commit
+def module_level_function():
+    frappe.enqueue(some_method, queue="long")
+
+
 # Test file context - these should be in test_*.py files
 # ruleid: frappe-test-whitelist-missing-protection
 @frappe.whitelist()

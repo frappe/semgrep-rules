@@ -287,6 +287,29 @@ rules:
   languages: [python]
   severity: ERROR
 
+- id: frappe-enqueue-without-after-commit
+  patterns:
+    - pattern-inside: |
+        class $DOCTYPE(...):
+          ...
+          def $METHOD(self, ...):
+            ...
+    - pattern-either:
+      - pattern: frappe.enqueue(...)
+      - pattern: frappe.enqueue_doc(...)
+      - pattern: enqueue(...)
+      - pattern: enqueue_doc(...)
+    - pattern-not: $ENQUEUE(..., enqueue_after_commit=$ANYTHING, ...)
+    - pattern-not: $ENQUEUE(..., now=True, ...)
+    - pattern-not: $ENQUEUE(..., is_async=False, ...)
+  paths:
+    exclude:
+      - "**/test_*.py"
+  message: |
+    Background jobs enqueued from controller methods can start before the current transaction is committed. The job then reads stale data or fails because the document does not exist yet. Pass `enqueue_after_commit=True` if the job depends on changes made in this transaction.
+  languages: [python]
+  severity: WARNING
+
 - id: frappe-cur-frm-usage
   pattern: cur_frm
   message: |
