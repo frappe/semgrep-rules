@@ -45,12 +45,16 @@ rules:
                   regex: .*\b(GET|HEAD|OPTIONS|QUERY)\b
       - pattern-either:
           - pattern: frappe.db.commit(...)
+          # enqueue_doc forwards its kwargs to enqueue
           - patterns:
-              - pattern: frappe.enqueue(...)
+              - pattern: frappe.$ENQUEUE(...)
+              - metavariable-regex:
+                  metavariable: $ENQUEUE
+                  regex: ^enqueue(_doc)?$
               # deferred jobs are dropped by the GET rollback, unless now=True runs them at once
-              - pattern-not: frappe.enqueue(..., enqueue_after_commit=True, ...)
+              - pattern-not: frappe.$ENQUEUE(..., enqueue_after_commit=True, ...)
           - pattern: frappe.enqueue(..., enqueue_after_commit=True, now=True, ...)
-          - pattern: frappe.enqueue_doc(...)
+          - pattern: frappe.enqueue_doc(..., enqueue_after_commit=True, now=True, ...)
           - pattern: frappe.sendmail(...)
           - pattern: frappe.db.sql_ddl(...)
           - pattern: frappe.db.add_index(...)

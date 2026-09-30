@@ -80,6 +80,24 @@ def enqueue_now_without_methods():
 	frappe.enqueue("app.module.job", now=True, enqueue_after_commit=True)
 
 
+@frappe.whitelist()
+def enqueue_doc_without_methods():
+	# ruleid: whitelisted-side-effect-on-get
+	frappe.enqueue_doc("ToDo", "x", "run")
+
+
+@frappe.whitelist()
+def enqueue_doc_after_commit_without_methods():
+	# ok: whitelisted-side-effect-on-get
+	frappe.enqueue_doc("ToDo", "x", "run", enqueue_after_commit=True)
+
+
+@frappe.whitelist()
+def enqueue_doc_now_without_methods():
+	# ruleid: whitelisted-side-effect-on-get
+	frappe.enqueue_doc("ToDo", "x", "run", now=True, enqueue_after_commit=True)
+
+
 @frappe.whitelist(methods=["GET"])
 def commit_with_get():
 	# ruleid: whitelisted-side-effect-on-get
