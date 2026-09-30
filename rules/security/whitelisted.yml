@@ -22,3 +22,43 @@ rules:
           @frappe.whitelist(..., allow_guest=True, ...)
           def $FUNC(...): ...
     message: "Whitelisted method that's accesible to guest should be manually reviewed by security team."
+  - id: whitelisted-side-effect-on-get
+    languages: [python]
+    severity: ERROR
+    patterns:
+      - pattern-either:
+          # methods unset allows all methods, including GET
+          - patterns:
+              - pattern-inside: |
+                  @frappe.whitelist(...)
+                  def $FUNC(...): ...
+              - pattern-not-inside: |
+                  @frappe.whitelist(..., methods=$METHODS, ...)
+                  def $FUNC(...): ...
+          # methods explicitly includes a safe method (see SAFE_HTTP_METHODS in frappe/auth.py)
+          - patterns:
+              - pattern-inside: |
+                  @frappe.whitelist(..., methods=$METHODS, ...)
+                  def $FUNC(...): ...
+              - metavariable-regex:
+                  metavariable: $METHODS
+                  regex: .*\b(GET|HEAD|OPTIONS|QUERY)\b
+      - pattern-either:
+          - pattern: frappe.db.commit(...)
+          - patterns:
+              - pattern: frappe.enqueue(...)
+              # deferred jobs are dropped by the GET rollback, unless now=True runs them at once
+              - pattern-not: frappe.enqueue(..., enqueue_after_commit=True, ...)
+          - pattern: frappe.enqueue(..., enqueue_after_commit=True, now=True, ...)
+          - pattern: frappe.enqueue_doc(...)
+          - pattern: frappe.sendmail(...)
+          - pattern: frappe.db.sql_ddl(...)
+          - pattern: frappe.db.add_index(...)
+          - pattern: frappe.db.add_unique(...)
+          - pattern: frappe.db.truncate(...)
+          - pattern: frappe.db.rename_table(...)
+          - pattern: frappe.db.change_column_type(...)
+    message: >-
+      '$FUNC' accepts GET requests (`methods=` is unset or includes a safe method), which skip CSRF checks.
+      GET changes are rolled back at the end of the request, but this call escapes that rollback.
+      Set `methods=["POST"]` (or another unsafe method only) on `@frappe.whitelist`.
