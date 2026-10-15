@@ -391,3 +391,23 @@ rules:
   severity: ERROR
   fix: |
     @whitelist_for_tests(...)
+
+- id: frappe-dialog-primary-action-get-values
+  patterns:
+    # focus on the callback, so that sibling callbacks (e.g. fields[].onchange) do not match
+    - pattern-either:
+      - pattern: |
+          {..., primary_action: function (...) { $...BODY }, ...}
+      - pattern: |
+          {..., primary_action: (...) => { $...BODY }, ...}
+      - pattern: |
+          {..., primary_action: (...) => $...BODY, ...}
+      - pattern: $D.set_primary_action($LABEL, function (...) { $...BODY })
+      - pattern: $D.set_primary_action($LABEL, (...) => { $...BODY })
+      - pattern: $D.set_primary_action($LABEL, (...) => $...BODY)
+    - focus-metavariable: $...BODY
+    - pattern: $DIALOG.get_values()
+  message: |
+    The dialog already calls `get_values()` and passes the values to the primary action. Use the first argument of the primary action instead. A second call can return `null` when a field has a pending value (for example a Table MultiSelect field during link validation).
+  languages: [javascript]
+  severity: WARNING
